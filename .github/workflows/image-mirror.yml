@@ -15,8 +15,7 @@ jobs:
   # 镜像转换任务
   sync_to_target_registry:
     # 运行环境
-    #runs-on: ubuntu-22.04
-    runs-on: centos-7.9.2009
+    runs-on: ubuntu-22.04
     # 运行条件 => issues 的 label 包含 image-mirror
     # if: contains(github.event.issue.labels.*.name, 'image-mirror')
     concurrency:
@@ -72,9 +71,9 @@ jobs:
       - name: prepare
         if: steps.check_body.outputs.is_image_format == 'true'
         run: |
-          wget -q  https://github.com/AliyunContainerService/image-syncer/releases/download/v1.5.4/image-syncer-v1.5.4-linux-arm64.tar.gz
-          tar zxf image-syncer-v1.5.4-linux-arm64.tar.gz 
-          sudo  yum -y install dos2unix 
+          wget -q  https://github.com/AliyunContainerService/image-syncer/releases/download/v1.5.4/image-syncer-v1.5.4-linux-amd64.tar.gz
+          tar zxf image-syncer-v1.5.4-linux-amd64.tar.gz 
+          sudo apt install dos2unix 
       - name: start sync
         if: steps.check_body.outputs.is_image_format == 'true'
         id: syncImage
